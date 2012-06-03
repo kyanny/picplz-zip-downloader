@@ -5,7 +5,7 @@ class Pic < ActiveRecord::Base
   def download
     return if self.downloaded
     open(self.url){ |image|
-      workdir = Rails.root.join('tmp', user.uid.to_s)
+      workdir = Rails.root.join('tmp', user.nickname)
       FileUtils.mkdir_p(workdir) unless Dir.exists?(workdir)
       file = workdir.join(self.pic_id.to_s).to_s + '.jpg'
       open(file, 'wb'){ |f|
