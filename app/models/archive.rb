@@ -21,7 +21,7 @@ class Archive < ActiveRecord::Base
   end
 
   def archive
-    Archive.connect_to_s3
+    connect_to_s3
     clean_old_archive
     get_pics_info
     download_pics
@@ -30,7 +30,7 @@ class Archive < ActiveRecord::Base
     self.update_attributes(:available => true)
   end
 
-  def self.connect_to_s3
+  def connect_to_s3
     AWS::S3::Base.establish_connection!(
       :access_key_id     => ENV['ACCESS_KEY_ID'],
       :secret_access_key => ENV['SECRET_ACCESS_KEY'],

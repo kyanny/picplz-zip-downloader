@@ -1,6 +1,5 @@
 desc 'debug'
 task :debug => :environment do
-  Archive.connect_to_s3
   Rake::Task['jobs:clear'].invoke
   Pic.destroy_all
   Archive.destroy_all
