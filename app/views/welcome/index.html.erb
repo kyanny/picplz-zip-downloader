@@ -1,13 +1,3 @@
-<div id="loading">
-	<p>loading...</p>
-	<button id="download">download all pics</button>
-</div>
+<%= button_to 'Create Zip Archive', :archive %>
 
-<% if current_user %>
-	<input type="hidden" name="uid" id="uid" value="<%= current_user.uid %>" />
-	<div id="pics">
-		<ul>
-			<li>pics</li>
-		</ul>
-	</div>
-<% end %>
+<% if current_user.archive.

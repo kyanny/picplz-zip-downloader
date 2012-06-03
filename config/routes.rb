@@ -1,5 +1,6 @@
 PicplzZipDeKure::Application.routes.draw do
   get "welcome/index"
+  match 'welcome#archive', :as => :archive
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -60,6 +61,4 @@ PicplzZipDeKure::Application.routes.draw do
 
   match '/auth/:provider/callback', to: 'sessions#create'
   match '/signout' => 'sessions#destroy', :as => :signout
-
-  match '/api/feed' => 'welcome#feed', :as => :feed
 end
