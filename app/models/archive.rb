@@ -1,5 +1,5 @@
 class Archive < ActiveRecord::Base
-  attr_accessible :, :user_id
+  attr_accessible :user_id
   belongs_to :user
 
   def self.archive(user_id)
