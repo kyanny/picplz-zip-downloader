@@ -31,11 +31,15 @@ class Pic < ActiveRecord::Base
     zip     = "#{workdir}.zip"
     Zip::Archive.open(zip, Zip::CREATE) do |ar|
       Dir.glob("#{workdir}/*.jpg").each do |jpg|
-        Rails.logger.debug(jpg)
         ar.add_file(jpg)
       end
     end
 
-    AWS::S3::S3Object.store(File.basename(zip), open(zip), 'picplz-zip-de-kure')
+    AWS::S3::S3Object.store(File.basename(zip), open(zip), 'picplz-zip-de-kure', {
+        :content_type => 'application/zip',
+        :access => :public_read,
+      })
+    public_url = AWS::S3::S3Object.url_for(File.basename(zip), 'picplz-zip-de-kure', { :authenticated => false })
+    Rails.logger.info("stored to #{public_url}")
   end
 end
