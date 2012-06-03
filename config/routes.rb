@@ -1,6 +1,6 @@
 PicplzZipDeKure::Application.routes.draw do
   get "welcome/index"
-  match 'welcome#archive', :as => :archive
+  post "welcome/archive"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
