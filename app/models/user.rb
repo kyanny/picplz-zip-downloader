@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     Hash[*auth['credentials']['token'].split('|').last.split('&').map{ |keyvalue| keyvalue.split('=') }.flatten]
   end
 
-  def get_pics_from_picplz(last_pic_id=nil)
+  def get_pics_info(last_pic_id=nil)
     require 'open-uri'
     url = "http://api.picplz.com/api/v2/user.json?id=#{self.uid}&include_pics=1&oauth_token=#{self.token}"
     if last_pic_id
