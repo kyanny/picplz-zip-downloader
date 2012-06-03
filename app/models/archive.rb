@@ -59,6 +59,7 @@ class Archive < ActiveRecord::Base
   end
 
   def delete_archive
-    AWS::S3::S3Object.delete(zip_name, bucket_name)
+    Rails.logger.info("delete zip archive #{self.public_url}")
+    AWS::S3::S3Object.delete(self.zip_name, self.bucket_name)
   end
 end

@@ -1,6 +1,5 @@
 <% if current_user.archive.available %>
 	<%= link_to 'Download Zip Archive', current_user.archive.public_url %>
-	<%= button_to 'Delete Zip Archive', :welcome_archive, :method => :delete %>
 <% else %>
 	<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post %>
 <% end %>
