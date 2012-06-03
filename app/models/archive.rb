@@ -2,9 +2,7 @@ class Archive < ActiveRecord::Base
   attr_accessible :user_id, :public_url, :available
   belongs_to :user
 
-  before_destroy do
-    AWS::S3::S3Object.delete(zip_name, bucket_name)
-  end
+  before_destroy :delete_archive
 
   def bucket_name
     PicplzZipDeKure::Application.config.s3_bucket_name
@@ -58,5 +56,9 @@ class Archive < ActiveRecord::Base
     public_url = AWS::S3::S3Object.url_for(s3_name, bucket_name, { :authenticated => false })
     self.update_attributes(:public_url => public_url)
     Rails.logger.info("stored to #{public_url}")
+  end
+
+  def delete_archive
+    AWS::S3::S3Object.delete(zip_name, bucket_name)
   end
 end
