@@ -11,7 +11,7 @@ class Pic < ActiveRecord::Base
     open(self.img_url){ |image|
       workdir = Rails.root.join('tmp', user.nickname)
       FileUtils.mkdir_p(workdir) unless Dir.exists?(workdir)
-      file = workdir.join(self.longurl_id).to_s + '.jpg'
+      file = workdir.join("#{picplz_self.longurl_id}").to_s + '.jpg'
       open(file, 'wb'){ |f|
         f.write image.read
         Rails.logger.info("download from #{self.img_url}")
