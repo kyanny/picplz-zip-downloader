@@ -17,6 +17,7 @@
 // http://picplz.com/user/kyanny/pic/105sg/download/
 // text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 
+/*
 function download(uid, last_pic_id){
   var data = {
     id: uid,
@@ -74,3 +75,4 @@ $(function(){
     download(uid, null);
   }
 });
+*/
