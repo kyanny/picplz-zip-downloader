@@ -1,5 +1,7 @@
-<% if @archive.available %>
-	<%= link_to 'Download Zip Archive', @archive.public_url %>
-<% else %>
-	<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post %>
+<% if current_user %>
+	<% if @archive.available %>
+		<%= link_to 'Download Zip Archive', @archive.public_url %>
+	<% else %>
+		<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post %>
+	<% end %>
 <% end %>
