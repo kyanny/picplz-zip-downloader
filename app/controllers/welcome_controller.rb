@@ -11,6 +11,9 @@ class WelcomeController < ApplicationController
   def archive
     case
     when request.post?
+      if current_user.archive
+        current_user.archive.destroy
+      end
       archive = Archive.create!(:user_id => current_user.id)
       archive.delay.archive
       archive.update_attributes(:enqueue => true)
