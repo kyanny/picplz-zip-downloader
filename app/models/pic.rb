@@ -26,8 +26,9 @@ class Pic < ActiveRecord::Base
     workdir = Rails.root.join('tmp', user.nickname)
     zip     = "#{workdir}.zip"
     Zip::Archive.open(zip, Zip::CREATE) do |ar|
-      Dir.entries(workdir.to_s).grep(/\.jpg/).each do |jpg|
-        ar.add_file("#{user.nickname}/#{jpg}")
+      Dir.glob("#{workdir}/*.jpg").each do |jpg|
+        Rails.logger.debug(jpg)
+        ar.add_file(jpg)
       end
     end
   end
