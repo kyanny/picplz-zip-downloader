@@ -21,12 +21,22 @@ class Archive < ActiveRecord::Base
   end
 
   def archive
+    connect_to_s3
     clean_old_archive
     get_pics_info
     download_pics
     create_zip
     store_to_s3
     self.update_attributes(:available => true)
+  end
+
+  def connect_to_s3
+    AWS::S3::Base.establish_connection!(
+      :access_key_id     => ENV['ACCESS_KEY_ID'],
+      :secret_access_key => ENV['SECRET_ACCESS_KEY'],
+      )
+
+    AWS::S3::Bucket.create(PicplzZipDeKure::Application.config.s3_bucket_name)
   end
 
   def clean_old_archive
