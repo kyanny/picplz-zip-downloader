@@ -21,11 +21,16 @@ class Archive < ActiveRecord::Base
   end
 
   def archive
+    clean_old_archive
     get_pics_info
     download_pics
     create_zip
     store_to_s3
     self.update_attributes(:available => true)
+  end
+
+  def clean_old_archive
+    FileUtils.rm_r(zip)
   end
 
   def get_pics_info
