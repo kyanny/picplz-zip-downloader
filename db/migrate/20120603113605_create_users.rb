@@ -1,9 +1,11 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :provider
-      t.string :client_id
-      t.string :display_name
+      t.string :provider # auth['provider']
+      t.string :uid      # auth['uid']
+      t.string :nickname # auth['info']['nickname']
+      t.string :url      # auth['info']['urls']['Picplz']
+      t.string :image    # auth['info']['image']
 
       t.timestamps
     end
