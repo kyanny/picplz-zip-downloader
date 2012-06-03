@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+#loading {
+    font-weight: bold;
+    font-size: x-large;
+    display: inline;
+}
+
+#download {
+    display: none;
+}

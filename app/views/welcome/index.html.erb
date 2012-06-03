@@ -1,4 +1,13 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div id="loading">
+	<p>loading...</p>
+	<button id="download">download all pics</button>
+</div>
 
-<%= link_to 'feed', :feed %>
+<% if current_user %>
+	<input type="hidden" name="uid" id="uid" value="<%= current_user.uid %>" />
+	<div id="pics">
+		<ul>
+			<li>pics</li>
+		</ul>
+	</div>
+<% end %>
