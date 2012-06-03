@@ -3,7 +3,7 @@ class Pic < ActiveRecord::Base
   belongs_to :user
 
   def longurl_id
-    url.split('/')[-2]
+    url.split('/')[-1]
   end
 
   def download
