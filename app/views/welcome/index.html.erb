@@ -3,13 +3,13 @@
 		<p><%= link_to 'Download Zip Archive', @archive.public_url %></p>
 
 		<% if @archive.old_enough %>
-			<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post %>
+			<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post, :class => 'btn btn-primary' %>
 		<% else %>
 			<p>Problem? Retry create zip will be enabled at <%= @archive.created_at.since(1.hour) %>.</p>
 		<% end %>
 	<% elsif @archive.enqueue %>
 		<p>Archive Zip creating. Please wait a few minutes.</p>
 	<% else %>
-		<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post %>
+		<%= button_to 'Create Zip Archive', :welcome_archive, :method => :post, :class => 'btn btn-primary' %>
 	<% end %>
 <% end %>
