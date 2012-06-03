@@ -22,6 +22,11 @@ class Pic < ActiveRecord::Base
     user.pics.each do |pic|
       pic.download
     end
-    # zip
+
+    workdir = Rails.root.join('tmp', user.nickname)
+    zip = Rails.root.join('tmp', user.nickname).to_s + '.zip'
+    Zip::Archive.open(zip, Zip::CREATE) do |ar|
+      ar.add_dir(workdir)
+    end
   end
 end
