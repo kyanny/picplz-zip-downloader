@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
       if res['value']['users'][0]['more_pics']
         last_pic_id = res['value']['users'][0]['last_pic_id']
-        self.get_pics_from_picplz(last_pic_id)
+        self.get_pics_info(last_pic_id)
       end
     }
   end
