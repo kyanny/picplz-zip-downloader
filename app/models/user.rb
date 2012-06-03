@@ -29,9 +29,10 @@ class User < ActiveRecord::Base
       res = JSON.parse(f.read)
       res['value']['users'][0]['pics'].each_with_index do |data, index|
         @pic = Pic.create! do |pic|
-          pic.url = data['pic_files']['640r']['img_url']
+          pic.user_id    = self.id
+          pic.url        = data['pic_files']['640r']['img_url']
           pic.downloaded = false
-          pic.archived = false
+          pic.archived   = false
         end
         @pic.delay.download
       end
