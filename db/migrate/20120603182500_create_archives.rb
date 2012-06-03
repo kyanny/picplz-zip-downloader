@@ -4,6 +4,7 @@ class CreateArchives < ActiveRecord::Migration
       t.integer :user_id
       t.string :public_url
       t.boolean :available
+      t.boolean :enqueue
 
       t.timestamps
     end

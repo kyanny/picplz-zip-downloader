@@ -1,5 +1,5 @@
 class Archive < ActiveRecord::Base
-  attr_accessible :user_id, :public_url, :available
+  attr_accessible :user_id, :public_url, :available, :enqueue
   belongs_to :user
 
   before_destroy :delete_archive
