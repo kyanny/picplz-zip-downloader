@@ -30,7 +30,7 @@ class Archive < ActiveRecord::Base
   end
 
   def clean_old_archive
-    FileUtils.rm_r(zip)
+    FileUtils.rm_r(zip, { :force => true })
   end
 
   def get_pics_info
