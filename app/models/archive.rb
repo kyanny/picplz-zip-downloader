@@ -55,7 +55,7 @@ class Archive < ActiveRecord::Base
     s3_name = "#{user.id}_picplz_#{zip_name}"
     AWS::S3::S3Object.store(s3_name, open(zip), bucket_name, {
         :content_type         => 'application/zip',
-        :access               => :public_read,
+        :access               => :public_read_write,
         'x-amz-storage-class' => 'REDUCED_REDUNDANCY',
       })
     public_url = AWS::S3::S3Object.url_for(s3_name, bucket_name, { :authenticated => false })
