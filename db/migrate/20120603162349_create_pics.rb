@@ -3,6 +3,7 @@ class CreatePics < ActiveRecord::Migration
     create_table :pics do |t|
       t.integer :user_id
       t.string :url
+      t.string :img_url
       t.boolean :downloaded
       t.boolean :archived
 

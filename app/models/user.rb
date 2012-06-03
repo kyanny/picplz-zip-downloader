@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
       res['value']['users'][0]['pics'].each_with_index do |data, index|
         @pic = Pic.create! do |pic|
           pic.user_id    = self.id
-          pic.url        = data['pic_files']['640r']['img_url']
+          pic.url        = data['url']
+          pic.img_url    = data['pic_files']['640r']['img_url']
           pic.downloaded = false
           pic.archived   = false
         end
