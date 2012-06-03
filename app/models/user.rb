@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
-      user.client_id = auth['client_id']
-      user.display_name = auth['info']['display_name']
+      user.uid      = auth['uid']
+      user.nickname = auth['info']['nickname']
+      user.url      = auth['info']['urls']['Picplz']
+      user.image    = auth['info']['image']
     end
   end
 end
