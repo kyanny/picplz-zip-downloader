@@ -19,24 +19,21 @@ class User < ActiveRecord::Base
     Hash[*auth['credentials']['token'].split('|').last.split('&').map{ |keyvalue| keyvalue.split('=') }.flatten]
   end
 
-  def get_pics_info(last_pic_id=nil)
-    require 'open-uri'
+  def picplz_user_api_url_base(last_pic_id=nil)
     url = "http://api.picplz.com/api/v2/user.json?id=#{self.uid}&include_pics=1&oauth_token=#{self.token}"
     if last_pic_id
       url = "#{url}&last_pic_id=#{last_pic_id}"
     end
+    url
+  end
+
+  def get_pics_info(last_pic_id=nil)
+    url = picplz_user_api_url_base(last_pic_id)
 
     open(url){ |f|
       res = JSON.parse(f.read)
-      res['value']['users'][0]['pics'].each_with_index do |data, index|
-        @pic = Pic.create! do |pic|
-          pic.user_id    = self.id
-          pic.url        = data['url']
-          pic.img_url    = data['pic_files']['640r']['img_url']
-          pic.downloaded = false
-          pic.archived   = false
-        end
-        # @pic.delay.download
+      res['value']['users'][0]['pics'].each_with_index do |pic_data, index|
+        Pic.create_with_user_and_pic_data(self, pic_data)
       end
 
       # if res['value']['users'][0]['more_pics']
@@ -44,7 +41,5 @@ class User < ActiveRecord::Base
       #   self.get_pics_from_picplz(last_pic_id)
       # end
     }
-
-    # Archive.delay.archive(self.id)
   end
 end

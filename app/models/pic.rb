@@ -2,6 +2,16 @@ class Pic < ActiveRecord::Base
   attr_accessible :archived, :downloaded, :url, :user_id
   belongs_to :user
 
+  def self.create_with_user_and_pic_data(user, pic_data)
+    self.create! do |pic|
+      pic.user_id    = user.id
+      pic.url        = pic_data['url']
+      pic.img_url    = pic_data['pic_files']['640r']['img_url']
+      pic.downloaded = false
+      pic.archived   = false
+    end
+  end
+
   def longurl_id
     url.split('/')[-1]
   end
