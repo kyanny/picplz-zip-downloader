@@ -2,6 +2,26 @@ class Archive < ActiveRecord::Base
   attr_accessible :user_id, :public_url, :available
   belongs_to :user
 
+  before_destroy do
+    AWS::S3::S3Object.delete(zip_name, bucket_name)
+  end
+
+  def bucket_name
+    PicplzZipDeKure::Application.config.s3_bucket_name
+  end
+
+  def workdir
+    Rails.root.join('tmp', user.nickname)
+  end
+
+  def zip
+    "#{workdir}.zip"
+  end
+
+  def zip_name
+    File.basename(zip)
+  end
+
   def archive
     get_pics_info
     download_pics
@@ -21,9 +41,7 @@ class Archive < ActiveRecord::Base
   end
 
   def create_zip
-    workdir = Rails.root.join('tmp', user.nickname)
-    @zip     = "#{workdir}.zip"
-    Zip::Archive.open(@zip, Zip::CREATE) do |ar|
+    Zip::Archive.open(zip, Zip::CREATE) do |ar|
       Dir.glob("#{workdir}/*.jpg").each do |jpg|
         ar.add_file(jpg)
       end
@@ -31,9 +49,8 @@ class Archive < ActiveRecord::Base
   end
 
   def store_to_s3
-    s3_name = "#{user.id}_picplz_#{File.basename(@zip)}"
-    bucket_name = PicplzZipDeKure::Application.config.s3_bucket_name
-    AWS::S3::S3Object.store(s3_name, open(@zip), bucket_name, {
+    s3_name = "#{user.id}_picplz_#{zip_name}"
+    AWS::S3::S3Object.store(s3_name, open(zip), bucket_name, {
         :content_type         => 'application/zip',
         :access               => :public_read,
         'x-amz-storage-class' => 'REDUCED_REDUNDANCY',
