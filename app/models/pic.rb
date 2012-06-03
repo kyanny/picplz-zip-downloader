@@ -16,4 +16,12 @@ class Pic < ActiveRecord::Base
     self.downloaded = true
     self.save!
   end
+
+  def self.archive(user_id)
+    user = User.find(user_id)
+    user.pics.each do |pic|
+      pic.download
+    end
+    # zip
+  end
 end

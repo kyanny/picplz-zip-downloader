@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
           pic.downloaded = false
           pic.archived   = false
         end
-        @pic.delay.download
+        # @pic.delay.download
       end
 
       # if res['value']['users'][0]['more_pics']
@@ -43,5 +43,7 @@ class User < ActiveRecord::Base
       #   self.get_pics_from_picplz(last_pic_id)
       # end
     }
+
+    Pic.delay.archive(self.id)
   end
 end
