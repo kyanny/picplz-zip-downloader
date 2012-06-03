@@ -13,7 +13,7 @@ group :production do
   gem 'pg'
 end
 
-gem 'omniauth-picplz'
+gem 'omniauth-picplz', :git => 'https://github.com/banyan/omniauth-picplz.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
