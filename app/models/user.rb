@@ -36,10 +36,10 @@ class User < ActiveRecord::Base
         Pic.create_with_user_and_pic_data(self, pic_data)
       end
 
-      # if res['value']['users'][0]['more_pics']
-      #   last_pic_id = res['value']['users'][0]['last_pic_id']
-      #   self.get_pics_from_picplz(last_pic_id)
-      # end
+      if res['value']['users'][0]['more_pics']
+        last_pic_id = res['value']['users'][0]['last_pic_id']
+        self.get_pics_from_picplz(last_pic_id)
+      end
     }
   end
 end
