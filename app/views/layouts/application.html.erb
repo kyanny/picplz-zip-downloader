@@ -8,23 +8,17 @@
 </head>
 <body>
 
+<div class="container">
+
+<div class="row">
 <h1>Picplz Zip でくれ (Picplz Zip Download)</h1>
-
-<% if flash[:notice] %>
-<div>
-<p><%= flash[:notice] %></p>
 </div>
-<% end %>
 
-<div id="user_nav">
-	<% if current_user %>
-		<%= image_tag(current_user.image) %>Welcome, <%= link_to current_user.nickname, current_user.url, target: '_blank' %>! <%= link_to 'Sign out', signout_path %>
-	<% else %>
-		<%= link_to 'Sign in with Picplz', '/auth/picplz' %>
-	<% end %>
-</div>
+<%= render :partial => 'layouts/notice' %>
+<%= render :partial => 'layouts/user_nav' %>
 
 <%= yield %>
 
+</div>
 </body>
 </html>
