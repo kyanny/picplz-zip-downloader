@@ -1,5 +1,5 @@
 class Archive < ActiveRecord::Base
-  attr_accessible :user_id, :public_url
+  attr_accessible :user_id, :public_url, :available
   belongs_to :user
 
   def archive
