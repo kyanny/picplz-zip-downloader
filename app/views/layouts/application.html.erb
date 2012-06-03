@@ -18,7 +18,7 @@
 
 <div id="user_nav">
 	<% if current_user %>
-		Welcome, <%= current_user.display_name %>!
+		Welcome, <%= current_user.display_name %>! <%= link_to 'Sign out', signout_path %>
 	<% else %>
 		<%= link_to 'Sign in with Picplz', '/auth/picplz' %>
 	<% end %>
