@@ -6,7 +6,7 @@ class Pic < ActiveRecord::Base
     open(self.url){ |image|
       workdir = Rails.root.join('tmp', user.uid)
       FileUtils.mkdir_p(workdir) unless Dir.exists?(workdir)
-      open(workdir.join(self.id, 'w'){ |f|
+      open(workdir.join(self.id), 'w'){ |f|
           f.write image.read
         }
       }
