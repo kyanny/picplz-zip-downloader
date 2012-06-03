@@ -8,10 +8,20 @@
 </head>
 <body>
 
+<% if flash[:notice] %>
+<div>
+<p><%= flash[:notice] %></p>
+</div>
+<% end %>
+
 <h1>Picplz Zip でくれ (Picplz Zip Download)</h1>
 
 <div id="user_nav">
-	<%= link_to 'Sign in with Picplz', '/auth/picplz' %>
+	<% if current_user %>
+		Welcome, <%= current_user.display_name %>!
+	<% else %>
+		<%= link_to 'Sign in with Picplz', '/auth/picplz' %>
+	<% end %>
 </div>
 
 <%= yield %>
