@@ -32,12 +32,13 @@ class Archive < ActiveRecord::Base
 
   def store_to_s3
     s3_name = "#{user.id}_picplz_#{File.basename(@zip)}"
-    AWS::S3::S3Object.store(s3_name, open(@zip), 'picplz-zip-de-kure', {
+    bucket_name = PicplzZipDeKure::Application.config.s3_bucket_name
+    AWS::S3::S3Object.store(s3_name, open(@zip), bucket_name, {
         :content_type         => 'application/zip',
         :access               => :public_read,
         'x-amz-storage-class' => 'REDUCED_REDUNDANCY',
       })
-    public_url = AWS::S3::S3Object.url_for(s3_name, 'picplz-zip-de-kure', { :authenticated => false })
+    public_url = AWS::S3::S3Object.url_for(s3_name, bucket_name, { :authenticated => false })
     self.update_attributes(:public_url => public_url)
     Rails.logger.info("stored to #{public_url}")
   end
