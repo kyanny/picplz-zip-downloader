@@ -6,5 +6,6 @@ task :debug => :environment do
   FileUtils.rm_r("#{Rails.root.join('tmp', 'ex')}",              { :verbose => true, :force => true })
   FileUtils.rm_r("#{Rails.root.join('tmp', user.nickname)}",     { :verbose => true, :force => true })
   FileUtils.rm_r("#{Rails.root.join('tmp', user.nickname)}.zip", { :verbose => true, :force => true })
-  user.get_pics_from_picplz
+  archive = Archive.create!(:user_id => user.id)
+  archive.delay.archive
 end

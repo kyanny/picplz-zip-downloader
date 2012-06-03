@@ -2,8 +2,7 @@ class Archive < ActiveRecord::Base
   attr_accessible :user_id
   belongs_to :user
 
-  def self.archive(user_id)
-    user = User.find(user_id)
+  def archive
     user.get_pics_from_picplz
 
     user.pics.each do |pic|
