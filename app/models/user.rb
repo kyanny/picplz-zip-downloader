@@ -45,6 +45,6 @@ class User < ActiveRecord::Base
       # end
     }
 
-    Archive.delay.archive(self.id)
+    # Archive.delay.archive(self.id)
   end
 end

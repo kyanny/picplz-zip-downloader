@@ -4,6 +4,8 @@ class Archive < ActiveRecord::Base
 
   def self.archive(user_id)
     user = User.find(user_id)
+    user.get_pics_from_picplz
+
     user.pics.each do |pic|
       pic.download
     end
