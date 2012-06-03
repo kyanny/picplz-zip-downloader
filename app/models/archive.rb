@@ -7,6 +7,7 @@ class Archive < ActiveRecord::Base
     download_pics
     create_zip
     store_to_s3
+    self.update_attributes(:available => true)
   end
 
   def get_pics_info
