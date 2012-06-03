@@ -35,5 +35,7 @@ class Pic < ActiveRecord::Base
         ar.add_file(jpg)
       end
     end
+
+    AWS::S3::S3Object.store(File.basename(zip), open(zip), 'picplz-zip-de-kure')
   end
 end
