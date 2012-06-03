@@ -38,6 +38,7 @@ class Archive < ActiveRecord::Base
         'x-amz-storage-class' => 'REDUCED_REDUNDANCY',
       })
     public_url = AWS::S3::S3Object.url_for(s3_name, 'picplz-zip-de-kure', { :authenticated => false })
+    self.update_attributes(:public_url => public_url)
     Rails.logger.info("stored to #{public_url}")
   end
 end
