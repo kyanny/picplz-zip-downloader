@@ -7,6 +7,7 @@ gem 'rails', '3.2.5'
 
 gem 'delayed_job_active_record'
 gem 'zipruby'
+gem 'aws-s3'
 
 group :development, :test do
   gem 'sqlite3'
