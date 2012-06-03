@@ -17,6 +17,7 @@ class WelcomeController < ApplicationController
       redirect_to :welcome_index, :notice => 'Start creating zip archive. Please wait a few minutes and reload this page. Download link appears.'
     when request.delete?
       current_user.archive.destroy
+      redirect_to :welcome_index, :notice => 'Zip deleted. Goodbye!'
     else
       raise
     end
