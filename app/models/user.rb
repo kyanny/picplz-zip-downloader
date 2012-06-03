@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
       user.nickname = auth['info']['nickname']
       user.url      = auth['info']['urls']['Picplz']
       user.image    = auth['info']['image']
+      user.token    = auth['credentials']['token']
+      user.secret   = auth['credentials']['secret']
     end
   end
 end
