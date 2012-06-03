@@ -15,6 +15,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'thin'
 end
 
 gem 'omniauth-picplz', :git => 'https://github.com/banyan/omniauth-picplz.git'
