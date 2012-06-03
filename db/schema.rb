@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120603162349) do
 
   create_table "pics", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "pic_id"
     t.string   "url"
     t.boolean  "downloaded"
     t.boolean  "archived"

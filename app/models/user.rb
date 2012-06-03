@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       res['value']['users'][0]['pics'].each_with_index do |data, index|
         @pic = Pic.create! do |pic|
           pic.user_id    = self.id
-          pic.pic_id     = data['pic_files']['id']
+          pic.pic_id     = data['id']
           pic.url        = data['pic_files']['640r']['img_url']
           pic.downloaded = false
           pic.archived   = false
@@ -38,10 +38,10 @@ class User < ActiveRecord::Base
         @pic.delay.download
       end
 
-      if res['value']['users'][0]['more_pics']
-        last_pic_id = res['value']['users'][0]['last_pic_id']
-        self.get_pics_from_picplz(last_pic_id)
-      end
+      # if res['value']['users'][0]['more_pics']
+      #   last_pic_id = res['value']['users'][0]['last_pic_id']
+      #   self.get_pics_from_picplz(last_pic_id)
+      # end
     }
   end
 end
