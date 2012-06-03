@@ -1,4 +1,4 @@
-PicplzZipDeKure::Application.routes.draw do
+PicplzZipDownloader::Application.routes.draw do
   get "welcome/index"
   post "welcome/archive"
   delete "welcome/archive"

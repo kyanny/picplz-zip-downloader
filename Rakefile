@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PicplzZipDeKure::Application.load_tasks
+PicplzZipDownloader::Application.load_tasks
